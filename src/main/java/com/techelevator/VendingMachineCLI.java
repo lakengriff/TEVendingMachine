@@ -2,6 +2,7 @@ package com.techelevator;
 
 import com.techelevator.view.VendingMenu;
 
+import java.math.BigDecimal;
 
 
 public class VendingMachineCLI {
@@ -29,11 +30,21 @@ public class VendingMachineCLI {
 		while (running) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
-			// A switch statement could also be used here.  Your choice.
-			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				// display vending machine items
-			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
+			switch (choice) {
+				case "1":
+					//display vending machine items - method from stock class
+					break;
+				case "2":
+					//purchase an item - financial class nonsense
+					break;
+				case "3":
+					//exit
+					break;
+				case "4":
+					//secret menu print sales report
+					break;
+				default:
+					System.out.println("Invalid choice, please type a number 1-4.");
 			}
 		}
 	}
