@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public class Candy extends Product{
 
-    public Candy(String productID, String productName, BigDecimal price, String typeOfProduct) {
-        super(productID, productName, price, typeOfProduct);
+    public Candy(String productID) {
+        super(productID);
     }
     @Override
     public void getSound() {

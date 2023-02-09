@@ -14,6 +14,9 @@ public class Product {
     private BigDecimal price = new BigDecimal(0.00);
     private String typeOfProduct;
 
+    public Product(String productID){
+        this.productID = productID;
+    }
 
     public Product(String productID, String productName, BigDecimal price, String typeOfProduct) {
         this.productID = productID;

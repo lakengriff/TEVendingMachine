@@ -4,9 +4,10 @@ import java.math.BigDecimal;
 
 public class Chip extends Product{
 
-    public Chip(String productID, String productName, BigDecimal price, String typeOfProduct) {
-        super(productID, productName, price, typeOfProduct);
+    public Chip(String productID) {
+        super(productID);
     }
+
     @Override
     public void getSound() {
         System.out.println("Crunch Crunch, It's Yummy!");
