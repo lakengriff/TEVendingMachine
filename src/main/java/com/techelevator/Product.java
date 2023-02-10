@@ -13,17 +13,27 @@ public class Product {
     private String productName;
     private BigDecimal price = new BigDecimal(0.00);
     private String typeOfProduct;
+    private int quantity;
 
     public Product(String productID){
         this.productID = productID;
     }
 
-    public Product(String productID, String productName, BigDecimal price, String typeOfProduct) {
+    public Product(String productID, String productName, BigDecimal price, String typeOfProduct, int quantity) {
         this.productID = productID;
         this.productName = productName;
         this.price = price;
         this.typeOfProduct = typeOfProduct;
+        this.quantity = 5;
 
+    }
+
+    public void dispense(){
+        if (quantity > 0){
+            this.quantity --;
+        }else {
+            System.out.println("Not enough supply.");
+        }
     }
 
     public void getSound() {
@@ -61,6 +71,14 @@ public class Product {
 
     public void setTypeOfProduct(String typeOfProduct) {
         this.typeOfProduct = typeOfProduct;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
 

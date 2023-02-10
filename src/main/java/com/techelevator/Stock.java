@@ -8,8 +8,11 @@ public class Stock extends Inventory{
     private final int MAX_STOCK = 5;
     private int currentStock = MAX_STOCK;
 
+
+
     Map<String, Integer> stockMap = new HashMap();
 
+    //map 2
 
     public Map<String, Integer> stockingMethod(){
 

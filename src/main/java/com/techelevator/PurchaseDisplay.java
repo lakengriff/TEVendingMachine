@@ -1,18 +1,19 @@
 package com.techelevator;
 
-import com.techelevator.view.VendingMenu;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class PurchaseDisplay {
 
     //BigDecimal moneyAddedBD = new BigDecimal("0");
     Scanner input = new Scanner(System.in);
-    double test = 0.00;
+    double balance = 0.00;
     //VendingMachineCLI cli = new VendingMachineCLI();
+    //getters/setters for financial
+    Display display = new Display();
+    Inventory inventory = new Inventory();
 
+    String purchaseChoice = "";
 
     public double feedMoney() {
         System.out.println("Hungry? Please deposit money (in $1.00 increments) by typing 1.00 and pressing Enter");
@@ -20,15 +21,23 @@ public class PurchaseDisplay {
         if (!moneyAdded.contains(".00")) {
             System.out.println("Please enter in a whole dollar amount. This machine don't do coins.");
             System.out.println("*********");
-            return test;
+            return balance;
         } else
             System.out.println("You have added $ " + moneyAdded);
             double monAddDouble = Double.parseDouble(moneyAdded);
-            return test += monAddDouble;
+            return balance += monAddDouble;
+    }
+
+    public void userPurchaseChoice (){
+        System.out.println("Please make your selection (ex: B2) :");
+        purchaseChoice = input.nextLine();
+        if(purchaseChoice.length() != 2){
+            System.out.println("Please enter a valid ID");
+        }
     }
 
     public void purchaseMenu(){
-        System.out.println("Current Money Provided: $" + test);
+        System.out.println("Current Money Provided: $" + balance);
         System.out.println();
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
@@ -47,7 +56,13 @@ public class PurchaseDisplay {
                     purchaseMenu();
                     break;
                 case "2":
-                    //select product
+                    display.displayBoard();
+                    userPurchaseChoice();
+                    inventory.makePurchase(purchaseChoice);
+                    //userinput to do the search
+                    //method takes user input, searches map by ID, returns product.get quantity -1
+                    //makePurchase(userinput) // return sound
+                    // balance method
                     break;
                 case "3":
                     //do transaction

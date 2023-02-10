@@ -9,11 +9,13 @@ import java.util.Scanner;
 
 public class Inventory {
 
-Product product;
+    Product product;
+    Map<String, Product> productHashMap = new HashMap();
 
 
-    public Map <String, Product> importInformation() {
-        Map <String, Product> productHashMap = new HashMap();
+//map 1
+
+    public Map<String, Product> importInformation() {
         String[] arrayOfText;
         File productInfo = new File("C:\\Users\\Student\\workspace\\module-1-capstone-team-0\\vendingmachine.csv");
         try (Scanner fileInput = new Scanner(productInfo);) {
@@ -24,13 +26,13 @@ Product product;
                 if (lineOfText.contains("Chip")) {
                     product = new Chip(arrayOfText[0]);
 
-                } else if (lineOfText.contains("Candy")){
+                } else if (lineOfText.contains("Candy")) {
                     product = new Candy(arrayOfText[0]);
 
-                } else if (lineOfText.contains("Drink")){
+                } else if (lineOfText.contains("Drink")) {
                     product = new Drink(arrayOfText[0]);
 
-                } else if(lineOfText.contains("Gum")){
+                } else if (lineOfText.contains("Gum")) {
                     product = new Gum(arrayOfText[0]);
                 }
 
@@ -38,6 +40,7 @@ Product product;
                 product.setProductName(arrayOfText[1]);
                 product.setPrice(BigDecimal.valueOf(Double.parseDouble(arrayOfText[2])));
                 product.setTypeOfProduct(arrayOfText[3]);
+                product.setQuantity(5);
 
                 productHashMap.put(arrayOfText[0], product);
             }
@@ -46,5 +49,15 @@ Product product;
         }
 
         return productHashMap;
+    }
+
+    public void makePurchase(String userInput) {
+        //if product doesnt exist // return to purchase menu
+        //inform customer if sold out
+        //if they select valid product, it is dispensed and sout sound.
+        importInformation().get(userInput);
+        if (product.getTypeOfProduct().equals("Candy")) {
+            System.out.println();
+        }
     }
 }
