@@ -24,6 +24,9 @@ public class VendingMachineCLI {
 	public VendingMachineCLI(VendingMenu menu) {
 		this.menu = menu;
 	}
+	Display display = new Display();
+	PurchaseDisplay purchaseDisplay = new PurchaseDisplay();
+
 
 	public void run() {
 		boolean running = true;
@@ -31,20 +34,21 @@ public class VendingMachineCLI {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			switch (choice) {
-				case "1":
-					//display vending machine items - method from stock class
+				case MAIN_MENU_OPTION_DISPLAY_ITEMS:
+					display.displayBoard();
 					break;
-				case "2":
-					//purchase an item - financial class nonsense
+				case MAIN_MENU_OPTION_PURCHASE:
+					purchaseDisplay.purchaseMenu();
 					break;
-				case "3":
+				case MAIN_MENU_OPTION_EXIT:
 					//exit
 					break;
-				case "4":
+				case MAIN_MENU_SECRET_OPTION:
 					//secret menu print sales report
 					break;
 				default:
 					System.out.println("Invalid choice, please type a number 1-4.");
+					break;
 			}
 		}
 	}
