@@ -5,27 +5,46 @@ import java.util.Map;
 
 public class Stock extends Inventory{
 
-    private final int MAX_STOCK = 5;
-    private int currentStock = MAX_STOCK;
 
+    private int startingStock = 5;
 
-
-    Map<String, Integer> stockMap = new HashMap();
+    Map<String, Integer> stockMap = new HashMap<>();
 
     //map 2
 
-    public Map<String, Integer> stockingMethod(){
+    public void stockingMethod(){
 
         for(String s : importInformation().keySet()){
-            stockMap.put(s, currentStock);
+            this.stockMap.put(s, startingStock);
         }
-        return stockMap;
+
     }
 
-    public void productPurchased(String userInputStringWheneverWeGetIt){
-        //need more menu info
+    public void productPurchased(String userInput){
 
-        currentStock--;
+        for (String id :getStockMap().keySet()) {
+            if (userInput.equals(id)) {
+                int updatedStock = stockMap.get(id);
+                this.stockMap.replace(id, updatedStock - 1);
+                break;
+            }
+        }
     }
-        //TODO need a method that gives ID, Name, currentStock
+
+    public Map<String, Integer> getStockMap() {
+        return this.stockMap;
+    }
+//    public void makePurchase(String userInput) {
+//        //if product doesnt exist // return to purchase menu
+//        //inform customer if sold out
+//        //if they select valid product, it is dispensed and sout sound.
+//        for (String id :getStockMap().keySet()) {
+//            if (userInput.equals(id)) {
+//                getStockMap().replace(userInput, getStockMap().get(userInput) - 1);
+//                System.out.println(getStockMap().get(userInput));
+//            }
+//        }
+//    }
+
+//TODO need a method that gives ID, Name, currentStock
 }

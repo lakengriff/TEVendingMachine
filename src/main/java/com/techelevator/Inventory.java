@@ -12,7 +12,6 @@ public class Inventory {
     Product product;
     Map<String, Product> productHashMap = new HashMap();
 
-
 //map 1
 
     public Map<String, Product> importInformation() {
@@ -51,13 +50,15 @@ public class Inventory {
         return productHashMap;
     }
 
-    public void makePurchase(String userInput) {
-        //if product doesnt exist // return to purchase menu
-        //inform customer if sold out
-        //if they select valid product, it is dispensed and sout sound.
-        importInformation().get(userInput);
-        if (product.getTypeOfProduct().equals("Candy")) {
-            System.out.println();
-        }
-    }
+//    public void makePurchase(String userInput) {
+//        //if product doesnt exist // return to purchase menu
+//        //inform customer if sold out
+//        //if they select valid product, it is dispensed and sout sound.
+//        for (String id :stock.getStockMap().keySet()) {
+//            if (userInput.equals(id)) {
+//               stock.getStockMap().replace(userInput, stock.getStockMap().get(userInput) - 1);
+//                System.out.println(stock.getStockMap().get(userInput));
+//            }
+//        }
+//    }
 }

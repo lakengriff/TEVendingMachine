@@ -9,7 +9,7 @@ public class Gum extends Product{
     }
 
     @Override
-    public void getSound() {
-        System.out.println("Chew Chew, Pop!");
+    public String getSound() {
+        return "Chew Chew, Pop!";
     }
 }

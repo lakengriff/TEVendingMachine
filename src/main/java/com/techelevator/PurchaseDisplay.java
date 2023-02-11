@@ -1,6 +1,8 @@
 package com.techelevator;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PurchaseDisplay {
@@ -12,8 +14,14 @@ public class PurchaseDisplay {
     //getters/setters for financial
     Display display = new Display();
     Inventory inventory = new Inventory();
-
+    Stock stock = new Stock();
+    private Map<String, Product> displayInventory = new HashMap<>();
     String purchaseChoice = "";
+
+    public PurchaseDisplay() {
+        displayInventory = inventory.importInformation();
+        stock.stockingMethod();
+    }
 
     public double feedMoney() {
         System.out.println("Hungry? Please deposit money (in $1.00 increments) by typing 1.00 and pressing Enter");
@@ -28,12 +36,13 @@ public class PurchaseDisplay {
             return balance += monAddDouble;
     }
 
-    public void userPurchaseChoice (){
+    public String userPurchaseChoice (){
         System.out.println("Please make your selection (ex: B2) :");
         purchaseChoice = input.nextLine();
         if(purchaseChoice.length() != 2){
             System.out.println("Please enter a valid ID");
         }
+        return purchaseChoice;
     }
 
     public void purchaseMenu(){
@@ -44,21 +53,27 @@ public class PurchaseDisplay {
         System.out.println("(3) Finish Transaction");
         System.out.println();
         System.out.println("Please choose an option >>> ");
-        String purchaseChoice = input.nextLine();
+        String purchaseInput = input.nextLine();
 
         boolean purchaseMenuRunning = true;
         while (purchaseMenuRunning) {
-            String choice = purchaseChoice;
 
-            switch (choice) {
+
+            switch (purchaseInput) {
                 case "1":
                     feedMoney();
                     purchaseMenu();
                     break;
                 case "2":
                     display.displayBoard();
-                    userPurchaseChoice();
-                    inventory.makePurchase(purchaseChoice);
+                    displayItems();
+                    String idChoice = userPurchaseChoice();
+                    if(displayInventory.containsKey(idChoice)) {
+                        stock.productPurchased(idChoice);
+                    }
+                    purchaseMenu();
+
+
                     //userinput to do the search
                     //method takes user input, searches map by ID, returns product.get quantity -1
                     //makePurchase(userinput) // return sound
@@ -74,6 +89,16 @@ public class PurchaseDisplay {
                     purchaseMenu();
                     break;
             }
+        }
+    }
+
+
+    public void displayItems(){
+        for(Map.Entry<String, Product> entry: displayInventory.entrySet()) {
+            String itemMenu = entry.getValue().getProductID() + "|" +
+                    entry.getValue().getProductName() + "|" + entry.getValue().getPrice() + "|" + stock.getStockMap().get(entry.getKey());
+
+            System.out.println(itemMenu);
         }
     }
 

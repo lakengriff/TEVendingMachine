@@ -36,6 +36,7 @@ public class VendingMachineCLI {
 			switch (choice) {
 				case MAIN_MENU_OPTION_DISPLAY_ITEMS:
 					display.displayBoard();
+					purchaseDisplay.displayItems();
 					break;
 				case MAIN_MENU_OPTION_PURCHASE:
 					purchaseDisplay.purchaseMenu();

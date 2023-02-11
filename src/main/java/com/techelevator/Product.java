@@ -36,8 +36,8 @@ public class Product {
         }
     }
 
-    public void getSound() {
-        System.out.print("");
+    public String getSound() {
+        return "";
 
     }
 

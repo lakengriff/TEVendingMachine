@@ -9,17 +9,21 @@ import java.util.Scanner;
 public class Display {
 
     Inventory inventory = new Inventory();
-    private  Map<String, Product> displayInventory = inventory.importInformation();
+
+
+    private  Map<String, Product> displayInventory = new HashMap<>();
     String[] infoArray;
 
-
+    public Display() {
+        displayInventory = inventory.importInformation();
+    }
 
     public void displayBoard() {       //This works in conjunction with the reader method to make the display if the user chooses option 1
         System.out.println("Available Inventory:");
         System.out.println();
         System.out.println("Location | Item | Price | Quantity Remaining");
         System.out.println();
-        displayItems();
+//        displayItems();
     }
 
     public void reader() {
@@ -52,14 +56,16 @@ public class Display {
         //make this a 4 each using our already made map
     }
 
-    public void displayItems(){
-        String itemMenu = "";
-
-        for(Map.Entry<String, Product> entry: displayInventory.entrySet()) {
-            itemMenu = entry.getValue().getProductID() + "|" +
-                    entry.getValue().getProductName() + "|" + entry.getValue().getPrice() + "|" + entry.getValue().getQuantity();
-            System.out.println(itemMenu);
-        }
-    }
+//    public void displayItems(){
+//
+//
+//        for(Map.Entry<String, Product> entry: displayInventory.entrySet()) {
+//            String itemMenu = entry.getValue().getProductID() + "|" +
+//                    entry.getValue().getProductName() + "|" + entry.getValue().getPrice() + "|" + stock.getStockMap().get(entry.getKey());
+//
+//            System.out.println(itemMenu);
+//        }
+//    }
 
 }
+
