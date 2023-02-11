@@ -1,7 +1,10 @@
 package com.techelevator;
 
+import com.techelevator.view.VendingMenu;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -10,6 +13,7 @@ public class PurchaseDisplay {
     //BigDecimal moneyAddedBD = new BigDecimal("0");
     Scanner input = new Scanner(System.in);
 
+    private VendingMenu menu;
     VendingMachineCLI vendingMachine;
     //getters/setters for financial
     Display display = new Display();
@@ -20,6 +24,9 @@ public class PurchaseDisplay {
     Balance balance = new Balance();
     String [] infoArray;
 
+    public PurchaseDisplay(VendingMenu menu) {
+        this.menu = menu;
+    }
 
     public PurchaseDisplay() {
         displayInventory = inventory.importInformation();
@@ -37,7 +44,7 @@ public class PurchaseDisplay {
     }
 
     public void purchaseMenu(){
-        System.out.println("Current Money Provided: $" + balance.feedMoney());
+        System.out.println("Current Money Provided: $" + balance.getBalance());
         System.out.println();
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
@@ -59,10 +66,10 @@ public class PurchaseDisplay {
                 if (displayInventory.containsKey(idChoice)) {
                     stock.productPurchased(idChoice);
                     //method that subtracts price from balance
-                    inventory.productHashMap.get(idChoice).getSound();
+//                    inventory.productHashMap.get(idChoice).getSound();
                     //method that logs transaction
                     //method printWriter Sales Report
-                    balance.balanceAfterPurchase(idChoice);
+//                    balance.balanceAfterPurchase(idChoice);
                     purchaseMenu();
                 }
             }else if (purchaseInput.equals("3")) {

@@ -21,6 +21,10 @@ public class VendingMachineCLI {
 
 	private VendingMenu menu;
 
+	public String getMAIN_MENU_OPTION_DISPLAY_ITEMS() {
+		return MAIN_MENU_OPTION_DISPLAY_ITEMS;
+	}
+
 	public VendingMachineCLI(VendingMenu menu) {
 		this.menu = menu;
 	}

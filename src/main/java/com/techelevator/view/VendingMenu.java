@@ -15,6 +15,7 @@ public class VendingMenu {
 		this.in = new Scanner(input);
 	}
 
+
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {
