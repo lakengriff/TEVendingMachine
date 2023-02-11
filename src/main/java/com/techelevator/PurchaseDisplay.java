@@ -9,7 +9,7 @@ public class PurchaseDisplay {
 
     //BigDecimal moneyAddedBD = new BigDecimal("0");
     Scanner input = new Scanner(System.in);
-    double balance = 0.00;
+
     //VendingMachineCLI cli = new VendingMachineCLI();
     //getters/setters for financial
     Display display = new Display();
@@ -17,24 +17,12 @@ public class PurchaseDisplay {
     Stock stock = new Stock();
     private Map<String, Product> displayInventory = new HashMap<>();
     String purchaseChoice = "";
-
+    Balance balance = new Balance();
     public PurchaseDisplay() {
         displayInventory = inventory.importInformation();
         stock.stockingMethod();
     }
 
-    public double feedMoney() {
-        System.out.println("Hungry? Please deposit money (in $1.00 increments) by typing 1.00 and pressing Enter");
-        String moneyAdded = input.nextLine();
-        if (!moneyAdded.contains(".00")) {
-            System.out.println("Please enter in a whole dollar amount. This machine don't do coins.");
-            System.out.println("*********");
-            return balance;
-        } else
-            System.out.println("You have added $ " + moneyAdded);
-            double monAddDouble = Double.parseDouble(moneyAdded);
-            return balance += monAddDouble;
-    }
 
     public String userPurchaseChoice (){
         System.out.println("Please make your selection (ex: B2) :");
@@ -46,7 +34,7 @@ public class PurchaseDisplay {
     }
 
     public void purchaseMenu(){
-        System.out.println("Current Money Provided: $" + balance);
+        System.out.println("Current Money Provided: $" + balance.feedMoney());
         System.out.println();
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
@@ -61,11 +49,10 @@ public class PurchaseDisplay {
 
             switch (purchaseInput) {
                 case "1":
-                    feedMoney();
+                    balance.feedMoney();
                     purchaseMenu();
                     break;
                 case "2":
-                    display.displayBoard();
                     displayItems();
                     String idChoice = userPurchaseChoice();
                     if(displayInventory.containsKey(idChoice)) {
@@ -94,6 +81,10 @@ public class PurchaseDisplay {
 
 
     public void displayItems(){
+        System.out.println("Available Inventory:");
+        System.out.println();
+        System.out.println("Location | Item | Price | Quantity Remaining");
+        System.out.println();
         for(Map.Entry<String, Product> entry: displayInventory.entrySet()) {
             String itemMenu = entry.getValue().getProductID() + "|" +
                     entry.getValue().getProductName() + "|" + entry.getValue().getPrice() + "|" + stock.getStockMap().get(entry.getKey());

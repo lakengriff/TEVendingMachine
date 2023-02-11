@@ -39,7 +39,6 @@ public class Inventory {
                 product.setProductName(arrayOfText[1]);
                 product.setPrice(BigDecimal.valueOf(Double.parseDouble(arrayOfText[2])));
                 product.setTypeOfProduct(arrayOfText[3]);
-                product.setQuantity(5);
 
                 productHashMap.put(arrayOfText[0], product);
             }
@@ -50,15 +49,4 @@ public class Inventory {
         return productHashMap;
     }
 
-//    public void makePurchase(String userInput) {
-//        //if product doesnt exist // return to purchase menu
-//        //inform customer if sold out
-//        //if they select valid product, it is dispensed and sout sound.
-//        for (String id :stock.getStockMap().keySet()) {
-//            if (userInput.equals(id)) {
-//               stock.getStockMap().replace(userInput, stock.getStockMap().get(userInput) - 1);
-//                System.out.println(stock.getStockMap().get(userInput));
-//            }
-//        }
-//    }
 }
