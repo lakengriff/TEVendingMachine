@@ -26,20 +26,20 @@ public class Display {
 //        displayItems();
     }
 
-    public String testMap() {
-        String quantityRemaining;
-        Map<String, Integer> productDisplayMap = new HashMap();
-        productDisplayMap.put(infoArray[0], inventory.productHashMap.get(infoArray[0]).getQuantity()); //TODO set the value to the value of a separate map tracking stock?
-        int remainingProduct = productDisplayMap.get(infoArray[0]);
-        if (remainingProduct == 0) {
-            String soldOut = "SOLD OUT";
-            return soldOut;
-        }
-        quantityRemaining = Integer.toString(remainingProduct);
-        return quantityRemaining;
-
-        //make this a 4 each using our already made map
-    }
+//    public String testMap() {
+//        String quantityRemaining;
+//        Map<String, Integer> productDisplayMap = new HashMap();
+//        productDisplayMap.put(infoArray[0], inventory.productHashMap.get(infoArray[0]).getQuantity()); //TODO set the value to the value of a separate map tracking stock?
+//        int remainingProduct = productDisplayMap.get(infoArray[0]);
+//        if (remainingProduct == 0) {
+//            String soldOut = "SOLD OUT";
+//            return soldOut;
+//        }
+//        quantityRemaining = Integer.toString(remainingProduct);
+//        return quantityRemaining;
+//
+//        //make this a 4 each using our already made map
+//    }
 
 //    public void displayItems(){
 //

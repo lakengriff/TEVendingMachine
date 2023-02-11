@@ -9,12 +9,9 @@ import java.util.Scanner;
 
 public class Inventory {
 
-    Product product;
-    Map<String, Product> productHashMap = new HashMap();
-
-//map 1
-
     public Map<String, Product> importInformation() {
+
+        Map<String, Product> productHashMap = new HashMap();
         String[] arrayOfText;
         File productInfo = new File("C:\\Users\\Student\\workspace\\module-1-capstone-team-0\\vendingmachine.csv");
         try (Scanner fileInput = new Scanner(productInfo);) {
@@ -23,30 +20,42 @@ public class Inventory {
                 arrayOfText = lineOfText.split("\\|");
 
                 if (lineOfText.contains("Chip")) {
-                    product = new Chip(arrayOfText[0]);
+                    Product product = new Chip(arrayOfText[0], arrayOfText[1], new BigDecimal(arrayOfText[2]), arrayOfText[3], 5);
+                    productHashMap.put(arrayOfText[0], product);
 
                 } else if (lineOfText.contains("Candy")) {
-                    product = new Candy(arrayOfText[0]);
+                    Product product = new Candy(arrayOfText[0], arrayOfText[1], new BigDecimal(arrayOfText[2]), arrayOfText[3], 5);
+                    productHashMap.put(arrayOfText[0], product);
 
                 } else if (lineOfText.contains("Drink")) {
-                    product = new Drink(arrayOfText[0]);
+                    Product product = new Drink(arrayOfText[0], arrayOfText[1], new BigDecimal(arrayOfText[2]), arrayOfText[3], 5);
+                    productHashMap.put(arrayOfText[0], product);
 
                 } else if (lineOfText.contains("Gum")) {
-                    product = new Gum(arrayOfText[0]);
+                    Product product = new Gum(arrayOfText[0], arrayOfText[1], new BigDecimal(arrayOfText[2]), arrayOfText[3], 5);
+                    productHashMap.put(arrayOfText[0], product);
+
                 }
 
-                product.setProductID(arrayOfText[0]);
-                product.setProductName(arrayOfText[1]);
-                product.setPrice(BigDecimal.valueOf(Double.parseDouble(arrayOfText[2])));
-                product.setTypeOfProduct(arrayOfText[3]);
-
-                productHashMap.put(arrayOfText[0], product);
             }
         } catch (FileNotFoundException e) {
             System.out.println("You dun goofed");
         }
 
         return productHashMap;
+    }
+
+    public void displayItems(Map<String, Product> inventoryMap){
+        System.out.println("Available Inventory:");
+        System.out.println();
+        System.out.println("Location | Item | Price | Quantity Remaining");
+        System.out.println();
+        for(Map.Entry<String, Product> entry: inventoryMap.entrySet()) {
+            String itemMenu = entry.getKey() + "|" +
+                    entry.getValue().getProductName() + "|" + entry.getValue().getPrice() + "|" + entry.getValue().getQuantity();
+
+            System.out.println(itemMenu);
+        }
     }
 
 }

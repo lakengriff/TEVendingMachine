@@ -22,7 +22,7 @@ public class PurchaseDisplay {
     private Map<String, Product> displayInventory = new TreeMap<>();
     String purchaseChoice = "";
     Balance balance = new Balance();
-    String [] infoArray;
+    String[] infoArray;
 
     public PurchaseDisplay(VendingMenu menu) {
         this.menu = menu;
@@ -34,16 +34,7 @@ public class PurchaseDisplay {
     }
 
 
-    public String userPurchaseChoice (){
-        System.out.println("Please make your selection (ex: B2) :");
-        purchaseChoice = input.nextLine();
-        if(purchaseChoice.length() != 2){
-            System.out.println("Please enter a valid ID");
-        }
-        return purchaseChoice;
-    }
-
-    public void purchaseMenu(){
+    public void purchaseMenu() {
         System.out.println("Current Money Provided: $" + balance.getBalance());
         System.out.println();
         System.out.println("(1) Feed Money");
@@ -52,50 +43,6 @@ public class PurchaseDisplay {
         System.out.println();
         System.out.println("Please choose an option >>> ");
         String purchaseInput = input.nextLine();
-
-        boolean purchaseMenuRunning = true;
-        while (purchaseMenuRunning) {
-
-
-            if (purchaseInput.equals("1")) {
-                balance.feedMoney();
-                purchaseMenu();
-            }else if (purchaseInput.equals("2")) {
-                displayItems();
-                String idChoice = userPurchaseChoice();
-                if (displayInventory.containsKey(idChoice)) {
-                    stock.productPurchased(idChoice);
-                    //method that subtracts price from balance
-//                    inventory.productHashMap.get(idChoice).getSound();
-                    //method that logs transaction
-                    //method printWriter Sales Report
-//                    balance.balanceAfterPurchase(idChoice);
-                    purchaseMenu();
-                }
-            }else if (purchaseInput.equals("3")) {
-                //method that give change
-                //method to return balance to 0
-                //This needs to return to main menu
-                purchaseMenuRunning = false;
-            }else
-                System.out.println("Invalid choice, please type a number 1-3");
-            purchaseMenu();
-        }
-    }
-
-
-    public void displayItems(){
-        System.out.println("Available Inventory:");
-        System.out.println();
-        System.out.println("Location | Item | Price | Quantity Remaining");
-        System.out.println();
-        for(Map.Entry<String, Product> entry: displayInventory.entrySet()) {
-            String itemMenu = entry.getValue().getProductID() + "|" +
-                    entry.getValue().getProductName() + "|" + entry.getValue().getPrice() + "|" + stock.getStockMap().get(entry.getKey());
-
-            System.out.println(itemMenu);
-        }
-    }
 
  /*   public void reader() {
 
@@ -121,4 +68,5 @@ public class PurchaseDisplay {
     }*/
 
 
+    }
 }
