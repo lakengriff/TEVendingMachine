@@ -1,23 +1,26 @@
 package com.techelevator;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class PurchaseDisplay {
 
     //BigDecimal moneyAddedBD = new BigDecimal("0");
     Scanner input = new Scanner(System.in);
 
-    //VendingMachineCLI cli = new VendingMachineCLI();
+    VendingMachineCLI vendingMachine;
     //getters/setters for financial
     Display display = new Display();
     Inventory inventory = new Inventory();
     Stock stock = new Stock();
-    private Map<String, Product> displayInventory = new HashMap<>();
+    private Map<String, Product> displayInventory = new TreeMap<>();
     String purchaseChoice = "";
     Balance balance = new Balance();
+    String [] infoArray;
+
+
     public PurchaseDisplay() {
         displayInventory = inventory.importInformation();
         stock.stockingMethod();
@@ -47,35 +50,29 @@ public class PurchaseDisplay {
         while (purchaseMenuRunning) {
 
 
-            switch (purchaseInput) {
-                case "1":
-                    balance.feedMoney();
+            if (purchaseInput.equals("1")) {
+                balance.feedMoney();
+                purchaseMenu();
+            }else if (purchaseInput.equals("2")) {
+                displayItems();
+                String idChoice = userPurchaseChoice();
+                if (displayInventory.containsKey(idChoice)) {
+                    stock.productPurchased(idChoice);
+                    //method that subtracts price from balance
+                    inventory.productHashMap.get(idChoice).getSound();
+                    //method that logs transaction
+                    //method printWriter Sales Report
+                    balance.balanceAfterPurchase(idChoice);
                     purchaseMenu();
-                    break;
-                case "2":
-                    displayItems();
-                    String idChoice = userPurchaseChoice();
-                    if(displayInventory.containsKey(idChoice)) {
-                        stock.productPurchased(idChoice);
-                    }
-                    purchaseMenu();
-
-
-                    //userinput to do the search
-                    //method takes user input, searches map by ID, returns product.get quantity -1
-                    //makePurchase(userinput) // return sound
-                    // balance method
-                    break;
-                case "3":
-                    //do transaction
-                    purchaseMenuRunning = false;
-                    //VendingMachineCLI.run();  TODO back to main menu
-                    break;
-                default:
-                    System.out.println("Invalid choice, please type a number 1-3.");
-                    purchaseMenu();
-                    break;
-            }
+                }
+            }else if (purchaseInput.equals("3")) {
+                //method that give change
+                //method to return balance to 0
+                //This needs to return to main menu
+                purchaseMenuRunning = false;
+            }else
+                System.out.println("Invalid choice, please type a number 1-3");
+            purchaseMenu();
         }
     }
 
@@ -92,6 +89,29 @@ public class PurchaseDisplay {
             System.out.println(itemMenu);
         }
     }
+
+ /*   public void reader() {
+
+        File inventoryList = new File("C:\\Users\\Student\\workspace\\module-1-capstone-team-0\\vendingmachine.csv");
+        int remainingSupply;
+
+        System.out.println("Available Inventory:");
+        System.out.println();
+        System.out.println("Location | Item | Price | Quantity Remaining");
+        System.out.println();
+        try (Scanner fileInput = new Scanner(inventoryList)) {
+            while (fileInput.hasNextLine()) {
+                String lineOfText = fileInput.nextLine();
+                infoArray = lineOfText.split("\\|");
+                for (Map.Entry<String, Product> entry : displayInventory.entrySet()) {
+                    remainingSupply = stock.getStockMap().get(entry.getKey());
+                    }
+                System.out.println(infoArray[0] + " | " + infoArray[1] + " | " + infoArray[2] + " | " + remainingSupply); //TODO Replace testMap() value with actual inventory remaining
+            }
+        }catch (FileNotFoundException e) {
+            System.out.println("damn");
+        }
+    }*/
 
 
 }

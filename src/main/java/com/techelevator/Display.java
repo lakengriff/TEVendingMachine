@@ -26,21 +26,6 @@ public class Display {
 //        displayItems();
     }
 
-    public void reader() {
-
-        File inventoryList = new File("C:\\Users\\Student\\workspace\\module-1-capstone-team-0\\vendingmachine.csv");
-
-        try (Scanner fileInput = new Scanner(inventoryList)) {
-            while (fileInput.hasNextLine()) {
-                String lineOfText = fileInput.nextLine();
-                infoArray = lineOfText.split("\\|");
-                System.out.println(infoArray[0] + " | " + infoArray[1] + " | " + infoArray[2] + " | " + testMap()); //TODO Replace testMap() value with actual inventory remaining
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("damn");
-        }
-    }
-
     public String testMap() {
         String quantityRemaining;
         Map<String, Integer> productDisplayMap = new HashMap();

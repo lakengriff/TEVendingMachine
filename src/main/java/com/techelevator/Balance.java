@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Balance {
     BigDecimal balance = new BigDecimal("0.00");
     Scanner input = new Scanner(System.in);
-    Inventory inventory;
+    Inventory inventory = new Inventory();
 
     public BigDecimal feedMoney() {
         System.out.println("Hungry? Please deposit money (in $1.00 increments) by typing 1.00 and pressing Enter");
@@ -30,6 +30,11 @@ public class Balance {
 
     public BigDecimal getProductPrice(String locationID) {
         return inventory.productHashMap.get(locationID).getPrice();
+    }
+
+    public BigDecimal balanceAfterPurchase(String locationID) {
+        balance = balance.subtract(getProductPrice(locationID));
+        return balance;
     }
 
     public BigDecimal getBalance() {

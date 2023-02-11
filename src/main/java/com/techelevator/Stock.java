@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,12 +26,27 @@ public class Stock extends Inventory{
 
         for (String id :getStockMap().keySet()) {
             if (userInput.equals(id)) {
+/*                if (stockMap.get(id) == 0){
+                    System.out.println("Sorry, this item is out of stock.");
+                    break;
+                }*/
                 int updatedStock = stockMap.get(id);
                 this.stockMap.replace(id, updatedStock - 1);
                 break;
             }
         }
     }
+
+/*    public void productPurchased(String userInput){
+
+        for (String id :getStockMap().keySet()) {
+            if (userInput.equals(id)) {
+                int updatedStock = stockMap.get(id);
+                this.stockMap.replace(id, updatedStock - 1);
+                break;
+            }
+        }
+    }*/
 
     public Map<String, Integer> getStockMap() {
         return this.stockMap;
