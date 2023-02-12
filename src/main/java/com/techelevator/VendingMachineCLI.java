@@ -54,6 +54,7 @@ public class VendingMachineCLI {
                             customerBalance.dispenseItem(inventoryMap, customerBalance, purchaseChoice, inventory);
                             break;
                         case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
+                            //give change
                             break;
                     }
                     break;
@@ -61,7 +62,7 @@ public class VendingMachineCLI {
                     running = false;
                     break;
                 case MAIN_MENU_SECRET_OPTION:
-                    //secret menu print sales report
+                    System.out.println("Nah.");
                     break;
                 default:
                     System.out.println("Invalid choice, please type a number 1-4.");

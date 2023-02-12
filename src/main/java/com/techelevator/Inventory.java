@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class Inventory {
 
     public Map<String, Product> importInformation() {
 
-        Map<String, Product> productHashMap = new HashMap();
+        Map<String, Product> productHashMap = new LinkedHashMap<>();
         String[] arrayOfText;
         File productInfo = new File("C:\\Users\\Student\\workspace\\module-1-capstone-team-0\\vendingmachine.csv");
         try (Scanner fileInput = new Scanner(productInfo);) {
@@ -52,7 +53,7 @@ public class Inventory {
         System.out.println();
         for(Map.Entry<String, Product> entry: inventoryMap.entrySet()) {
             String itemMenu = entry.getKey() + "|" +
-                    entry.getValue().getProductName() + "|" + entry.getValue().getPrice() + "|" + entry.getValue().getQuantity();
+                    entry.getValue().getProductName() + "|" + entry.getValue().getPrice() + "|" + ((entry.getValue().getQuantity() == 0) ? "SOLD OUT" : entry.getValue().getQuantity());
 
             System.out.println(itemMenu);
         }
