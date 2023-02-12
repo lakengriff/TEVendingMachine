@@ -49,23 +49,25 @@ public class VendingMachineCLI {
                     switch (purchaseChoice) {
                         case PURCHASE_MENU_OPTION_FEED_MONEY:
                             customerBalance.feedMoney();
+                            System.out.println("Your available balance is: $" + customerBalance.getBalance());
                             break;
                         case PURCHASE_MENU_OPTION_SELECT_PRODUCT:
                             customerBalance.dispenseItem(inventoryMap, customerBalance, purchaseChoice, inventory);
                             break;
                         case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
-                            //give change
+                            customerBalance.makeChange(customerBalance.getBalance());
+                            customerBalance.setBalanceToZero();
                             break;
                     }
                     break;
                 case MAIN_MENU_OPTION_EXIT:
                     running = false;
                     break;
-                case MAIN_MENU_SECRET_OPTION:
-                    System.out.println("Nah.");
-                    break;
+//                case MAIN_MENU_SECRET_OPTION:
+//                    System.out.println("Nah.");
+//                    break;
                 default:
-                    System.out.println("Invalid choice, please type a number 1-4.");
+                    System.out.println("Invalid choice, please type a number 1-3. Option 4 is under construction!");
                     break;
             }
         }
