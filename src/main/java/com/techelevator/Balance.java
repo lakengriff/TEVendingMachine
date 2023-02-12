@@ -33,11 +33,20 @@ public class Balance {
         } else
             System.out.println("You have added $ " + moneyAdded);
 //        double monAddDouble = Double.parseDouble(moneyAdded);
-        BigDecimal monAddBd = new BigDecimal(moneyAdded);
+        if (moneyAdded.contains(".00")) {
+            try {
+                BigDecimal monAddBd = new BigDecimal(moneyAdded);
 //        balance = balance.add(monAddBd);
-        setBalance(balance.add(monAddBd));
-        String feedMoneyString = "FEED MONEY: $" + moneyAdded + " $" + balance;
-        logger.log(feedMoneyString);
+                setBalance(balance.add(monAddBd));
+                String feedMoneyString = "FEED MONEY: $" + moneyAdded + " $" + balance;
+                logger.log(feedMoneyString);
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid whole-dollar amount.");
+            }
+        }
+        else {
+            System.out.println("We'd really like you to add .00 to the end of your dollar amount.");
+        }
     }
 
     public void dispenseItem(Map<String, Product> inventoryMap, Balance customerBalance, String purchaseChoice, Inventory inventory) {
@@ -68,21 +77,26 @@ public class Balance {
 
 
     public String makeChange(BigDecimal balance) {
-        BigDecimal noDecimalBalance = (balance.multiply(oneHundred));
-        double noDecimalDouble = noDecimalBalance.doubleValue();
-        int noDecimalInt = (int)noDecimalDouble;
-        int numberOfQuarters = noDecimalInt / QUARTER;
-        int balanceAfterQuarters = noDecimalInt - (numberOfQuarters * QUARTER);
-        int numberOfDimes = balanceAfterQuarters / DIME;
-        int balanceAfterDimes = balanceAfterQuarters - (numberOfDimes * DIME);
-        int numberOfNickels = balanceAfterDimes / NICKEL;
-        int balanceAfterNickels = balanceAfterDimes - (numberOfDimes * NICKEL);
-        String changeInCoins = "Here's your change! " + numberOfQuarters + (numberOfQuarters == 1 ? " quarter, " : " quarters, ")
-                + numberOfDimes + (numberOfDimes == 1 ? " dime, " : " dimes, ") + numberOfNickels + (numberOfNickels == 1 ? " nickel." : " nickels.");
-        System.out.println(changeInCoins);
-        String changeLog = "GIVE CHANGE: $" + balance + " " + "$0.00";
-        logger.log(changeLog);
-        return changeInCoins;
+        if (balance.compareTo(BigDecimal.ZERO) >= 0) {
+            BigDecimal noDecimalBalance = (balance.multiply(oneHundred));
+            double noDecimalDouble = noDecimalBalance.doubleValue();
+            int noDecimalInt = (int) noDecimalDouble;
+            int numberOfQuarters = noDecimalInt / QUARTER;
+            int balanceAfterQuarters = noDecimalInt - (numberOfQuarters * QUARTER);
+            int numberOfDimes = balanceAfterQuarters / DIME;
+            int balanceAfterDimes = balanceAfterQuarters - (numberOfDimes * DIME);
+            int numberOfNickels = balanceAfterDimes / NICKEL;
+            int balanceAfterNickels = balanceAfterDimes - (numberOfDimes * NICKEL);
+            String changeInCoins = "Here's your change! " + numberOfQuarters + (numberOfQuarters == 1 ? " quarter, " : " quarters, ")
+                    + numberOfDimes + (numberOfDimes == 1 ? " dime, " : " dimes, ") + numberOfNickels + (numberOfNickels == 1 ? " nickel." : " nickels.");
+            System.out.println(changeInCoins);
+            String changeLog = "GIVE CHANGE: $" + balance + " " + "$0.00";
+            logger.log(changeLog);
+            return changeInCoins;
+        } else {
+            String negativeBalance = "Your balance is negative?! Quick, add more money!";
+            return negativeBalance;
+        }
     }
 
     public BigDecimal setBalanceToZero(){
