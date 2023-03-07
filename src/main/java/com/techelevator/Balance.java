@@ -21,32 +21,26 @@ public class Balance {
         this.balance = balance;
     }
 
-    public void feedMoney() { //TODO Make the verbage a little more clear
-        //Purpose: User gives an amount to add to balance.
+    public void feedMoney() {
 
         System.out.println("Hungry? Please deposit money in a whole-dollar amount. I cannot accept change. (ex. 1.00)");
         String moneyAdded = input.nextLine();
         if (!moneyAdded.contains(".00")) {
-            System.out.println("Please enter in a whole dollar amount. This machine don't do coins.");
+            System.out.println("Please enter in a whole dollar amount, this machine does not accept coins.");
             System.out.println("*********");
-
         } else
             System.out.println("You have added $ " + moneyAdded);
-//        double monAddDouble = Double.parseDouble(moneyAdded);
         if (moneyAdded.contains(".00")) {
             try {
                 BigDecimal monAddBd = new BigDecimal(moneyAdded);
-//        balance = balance.add(monAddBd);
                 setBalance(balance.add(monAddBd));
                 String feedMoneyString = "FEED MONEY: $" + moneyAdded + " $" + balance;
                 logger.log(feedMoneyString);
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid whole-dollar amount.");
             }
-        }
-        else {
+        } else
             System.out.println("We'd really like you to add .00 to the end of your dollar amount.");
-        }
     }
 
     public void dispenseItem(Map<String, Product> inventoryMap, Balance customerBalance, String purchaseChoice, Inventory inventory) {
@@ -86,7 +80,6 @@ public class Balance {
             int numberOfDimes = balanceAfterQuarters / DIME;
             int balanceAfterDimes = balanceAfterQuarters - (numberOfDimes * DIME);
             int numberOfNickels = balanceAfterDimes / NICKEL;
-            int balanceAfterNickels = balanceAfterDimes - (numberOfDimes * NICKEL);
             String changeInCoins = "Here's your change! " + numberOfQuarters + (numberOfQuarters == 1 ? " quarter, " : " quarters, ")
                     + numberOfDimes + (numberOfDimes == 1 ? " dime, " : " dimes, ") + numberOfNickels + (numberOfNickels == 1 ? " nickel." : " nickels.");
             System.out.println(changeInCoins);

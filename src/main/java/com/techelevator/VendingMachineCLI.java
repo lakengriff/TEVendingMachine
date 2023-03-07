@@ -35,6 +35,12 @@ public class VendingMachineCLI {
     Balance customerBalance = new Balance();
     Map<String, Product> inventoryMap = inventory.importInformation();
 
+    public static void main(String[] args) {
+        VendingMenu menu = new VendingMenu(System.in, System.out);
+        VendingMachineCLI cli = new VendingMachineCLI(menu);
+        cli.run();
+    }
+
     public void run() {
         boolean running = true;
         while (running) {
@@ -63,21 +69,10 @@ public class VendingMachineCLI {
                 case MAIN_MENU_OPTION_EXIT:
                     running = false;
                     break;
-//                case MAIN_MENU_SECRET_OPTION:
-//                    System.out.println("Nah.");
-//                    break;
                 default:
                     System.out.println("Invalid choice, please type a number 1-3. Option 4 is under construction!");
                     break;
             }
         }
     }
-
-    public static void main(String[] args) {
-        VendingMenu menu = new VendingMenu(System.in, System.out);
-        VendingMachineCLI cli = new VendingMachineCLI(menu);
-        cli.run();
-    }
-
-
 }
